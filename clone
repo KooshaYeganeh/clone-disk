@@ -1,0 +1,34 @@
+#!/usr/bin/bash
+
+
+
+clone_disk(){
+	
+	
+		device=`zenity --forms --title "KYGnus Clone Disk" \
+			--text "Get Clone Fast and Easy \n\n Enter Disk and Get Clone of Your HardDrive \n\n"  \
+			--add-combo "Insert Device" \
+			--add-combo "Insert Device" \
+			--width 500 \
+			--height 300 \
+			--combo-values "sda|sdb|sdc|sdd|sde" \
+			--combo-values "sda|sdb|sdc|sdd|sde"`
+
+			disk1=`echo "$device" | cut -d "|" -f1`
+			disk2=`echo "$device" | cut -d "|" -f2`
+			
+				
+			
+		
+
+			
+		if [ "$device" ];then
+			sudo dd if=/dev/$disk1 of=/tmp/device_clone.img bs=1M conv=noerror
+			sudo dd if=/tmp/device_clone.img of=/dev/$disk2 bs=1M conv=noerror
+		else
+			exit 0
+		fi
+}
+
+
+clone_disk
