@@ -6,7 +6,7 @@ Make a clone of your hard drives very easily
 
 
 
-# Tnstall
+## Install
 
 ```
 cd /tmp
@@ -29,7 +29,7 @@ sudo mv clone /usr/bin
 ```
 
 
-# Remove
+## Remove
 
 ``` 
 sudo rm /usr/bin/clone
