@@ -6,28 +6,41 @@ clone_disk(){
 	
 	
 		device=`zenity --forms --title "KYGnus Clone Disk" \
-			--text "Get Clone Fast and Easy \n\n Enter Disk and Get Clone of Your HardDrive \n\n"  \
-			--add-combo "Insert Device" \
-			--add-combo "Insert Device" \
-			--width 500 \
+			--text "Get Clone Fast and Easy \n\n Enter Disk and Get Clone of Your HardDrive \n\n Note:If you do not select the second device, an image file will be prepared for you only from the first device"  \
+			--add-combo "Insert Source Device" \
+			--add-combo "Insert Destination Device" \
+			--width 800 \
 			--height 300 \
 			--combo-values "sda|sdb|sdc|sdd|sde" \
 			--combo-values "sda|sdb|sdc|sdd|sde"`
 
 			disk1=`echo "$device" | cut -d "|" -f1`
 			disk2=`echo "$device" | cut -d "|" -f2`
-			
-				
+
+
+			check_disk1=`lsblk | grep "$disk1"`
+			check_disk2=`lsblk | grep "$disk1"`
+
+
+			if [ "$check_disk1" ] && [ "$check_disk2" ];then
+				if [ "$device" ];then
+					sudo dd if=/dev/$disk1 of=/tmp/device_clone.img bs=1M conv=noerror
+					sudo dd if=/tmp/device_clone.img of=/dev/$disk2 bs=1M conv=noerror
+				else
+					exit 0
+				fi
+			else
+				zenity --warning \
+				       --title "Warning Message" \
+				       --width 500 \
+				       --height 100 \
+				       --text "Disk Not Found"
+			fi
+					
 			
 		
 
 			
-		if [ "$device" ];then
-			sudo dd if=/dev/$disk1 of=/tmp/device_clone.img bs=1M conv=noerror
-			sudo dd if=/tmp/device_clone.img of=/dev/$disk2 bs=1M conv=noerror
-		else
-			exit 0
-		fi
 }
 
 
