@@ -33,6 +33,7 @@ sudo mv clone /usr/bin
 
 ```
 cd /tmp && wget https://github.com/KooshaYeganeh/clone-disk/archive/refs/heads/main.zip && unzip main.zip && cd clone-disk-main && sudo mv clone /usr/bin && cd
+```
 
 ## Remove
 
