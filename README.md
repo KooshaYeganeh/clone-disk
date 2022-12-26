@@ -40,3 +40,5 @@ cd /tmp && wget https://github.com/KooshaYeganeh/clone-disk/archive/refs/heads/m
 sudo rm /usr/bin/clone
 ```
 
+
+**I Test This Script on OpenSuse Leap 15.3 and Peppermint10**
