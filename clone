@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-
+# A simple script with GUI to clone hard and flash drives
 
 clone_disk(){
 	
@@ -13,15 +13,16 @@ clone_disk(){
 			--height 300 \
 			--combo-values "sda|sdb|sdc|sdd|sde" \
 			--combo-values "sda|sdb|sdc|sdd|sde"`
-
+			
+			## disks: Detetct Devices from zenity Outputs
 			disk1=`echo "$device" | cut -d "|" -f1`
 			disk2=`echo "$device" | cut -d "|" -f2`
 
-
+			## check Deisks in block Lists
 			check_disk1=`lsblk | grep "$disk1"`
 			check_disk2=`lsblk | grep "$disk1"`
 
-
+			## check Disk to Detect Valid ones
 			if [ "$check_disk1" ] && [ "$check_disk2" ];then
 				if [ "$device" ];then
 					sudo dd if=/dev/$disk1 of=/tmp/device_clone.img bs=1M conv=noerror
